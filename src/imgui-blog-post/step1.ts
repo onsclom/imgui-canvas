@@ -1,3 +1,10 @@
+/*
+"game" loop setup:
+- handling high dpi
+- using raf
+- centering a "div" using math
+*/
+
 const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
 

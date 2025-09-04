@@ -9,7 +9,6 @@ const uiState = {
   ctx: null as CanvasRenderingContext2D | null,
 
   theme: {
-    // borderColor: "#333",
     hoveredBackground: "#777",
     unhoveredBackground: "#555",
     textColor: "#eee",
@@ -79,24 +78,6 @@ function button(
     // background
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvasRect.width, canvasRect.height);
-  }
-
-  // app ui stuff here
-  {
-    // red square with text
-    const rect = { width: 100, height: 100 };
-    ctx.fillStyle = "red";
-    ctx.fillRect(
-      (canvasRect.width - rect.width) / 2,
-      (canvasRect.height - rect.height) / 2,
-      rect.width,
-      rect.height,
-    );
-    ctx.fillStyle = "white";
-    ctx.font = "16px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("Hello world!", canvasRect.width / 2, canvasRect.height / 2);
   }
 
   if (button("Click me!", 20, 20, 100, 40)) {

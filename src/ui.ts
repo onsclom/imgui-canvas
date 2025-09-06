@@ -35,7 +35,6 @@ export const state = {
     {
       // values for transitions
       hovered_t: number;
-      active_t: number;
     }
   >(),
 
@@ -67,8 +66,6 @@ export const state = {
     borderSize: 1,
     borderColor: "#333",
   },
-
-  checkboxValue: false,
 };
 
 document.body.addEventListener("mousemove", (e) => {
@@ -117,7 +114,6 @@ export function register(
   if (!state.persisted.has(id)) {
     state.persisted.set(id, {
       hovered_t: 0,
-      active_t: 0,
     });
   }
 }
@@ -218,7 +214,6 @@ export function checkbox(
   }
   const checked = pointerValue.get();
 
-  // TODO draw
   const ctx = state.ctx;
   if (ctx) {
     ctx.fillStyle = state.theme.borderColor;
@@ -309,7 +304,6 @@ export function window(
           state.cursor = "grabbing";
         } else if (hovered) {
           if (state.mouse.justClicked) {
-            // TODO just make the title bar draggable maybe?
             state.dragging = id;
           }
           state.cursor = "grab";
@@ -448,7 +442,6 @@ export function end(dt: number) {
 
   // TODO: purge old entries
   state.persisted.forEach((entry, id) => {
-    // simple linear interpolation for now
     const target_hovered = state.hovered === id ? 1 : 0;
     const smoothing = 0.01;
     entry.hovered_t = lerp(

@@ -101,7 +101,6 @@ let lastTime = performance.now();
 
   UI.window("test window", 300, 200, 200, 200, () => {
     if (UI.button("click me", 10, 10, 100, 30)) {
-      console.log("first window button clicked");
       state.events.push("first window button clicked");
     }
   });

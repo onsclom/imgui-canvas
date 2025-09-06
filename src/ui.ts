@@ -1,14 +1,10 @@
 /*
 planning:
-- cursor types
 - bring this into canvas-basics
 - use existing input system
 - make animation for clicking?
 - animate values on checkboxes?
 - make elements take props obj (with good default values)
-- figure out solution for window z-axis
-  - think about <select> dropdowns and such too!
-  - does every element need a definition to multiple passes
 - think about what a multiple pass solution would grant us
   - no delay hover is nice.. we can delete the "nextHovered" craziness
 */
@@ -179,7 +175,10 @@ export function button(
   if (hovered) {
     state.hovered = id;
     state.cursor = "pointer";
-    return state.mouse.justClicked;
+    if (state.mouse.justClicked) {
+      state.persisted.get(id)!.hovered_t = 0;
+      return true;
+    }
   }
   return false;
 }
@@ -215,6 +214,7 @@ export function checkbox(
   const prevChecked = pointerValue.get();
   if (clicked) {
     pointerValue.set(!prevChecked);
+    state.persisted.get(id)!.hovered_t = 0;
   }
   const checked = pointerValue.get();
 

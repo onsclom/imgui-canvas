@@ -24,15 +24,16 @@ function generateRandomButtons() {
     height: buttonHeight,
   }));
 }
-let randomButtons = generateRandomButtons();
 
 const state = {
+  randomButtons: generateRandomButtons(),
   animateButtons: false,
   events: [] as string[],
 };
 
 let lastTime = performance.now();
 (function tick() {
+  console.time("tick");
   const now = performance.now();
   const dt = now - lastTime;
   lastTime = now;
@@ -55,7 +56,7 @@ let lastTime = performance.now();
     ctx.fillRect(0, 0, canvasRect.width, canvasRect.height);
   }
 
-  for (const btn of randomButtons) {
+  for (const btn of state.randomButtons) {
     if (state.animateButtons) {
       btn.x += btn.dx * dt * 0.1;
       btn.y += btn.dy * dt * 0.1;
@@ -87,7 +88,7 @@ let lastTime = performance.now();
   }
 
   if (UI.button("randomize buttons", 20, 20, buttonWidth, buttonHeight)) {
-    randomButtons = generateRandomButtons();
+    state.randomButtons = generateRandomButtons();
   }
 
   UI.checkbox(
@@ -118,5 +119,6 @@ let lastTime = performance.now();
 
   UI.end(dt);
 
+  console.timeEnd("tick");
   requestAnimationFrame(tick);
 })();
